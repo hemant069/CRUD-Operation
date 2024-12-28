@@ -16,6 +16,6 @@ const CurdSchema:Schema<crud>=new Schema({
 })
 
 
-const CrudModal=(mongoose.models.CurdSchema as mongoose.Model<crud>)||mongoose.model<crud>("crud",CurdSchema)
+const CrudModal=(mongoose.models.crud as mongoose.Model<crud>)||mongoose.model<crud>("crud",CurdSchema)
 
 export default CrudModal;
