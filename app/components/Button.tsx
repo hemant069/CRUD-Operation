@@ -1,7 +1,14 @@
 "use client";
-const Button = ({ Text }) => {
+
+interface btn {
+  Text: string;
+  onClick?: () => void;
+}
+const Button = ({ Text, onClick }: btn) => {
   return (
-    <button className={`bg-[#271f0b]  py-2 px-10 rounded-md`}>{Text}</button>
+    <button onClick={onClick} className={`bg-[#271f0b]  py-2 px-10 rounded-md`}>
+      {Text}
+    </button>
   );
 };
 
