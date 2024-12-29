@@ -1,7 +1,8 @@
+"use client";
 import React, { useState } from "react";
 import Button from "./Button";
 import axios from "axios";
-import { message } from "@/zodSchema/zodCrud";
+import toast from "react-hot-toast";
 
 interface modal {
   ShowModal: () => void;
@@ -14,10 +15,11 @@ const Model = ({ ShowModal }: modal) => {
       const data = await axios.post("api/crud", { message: text });
 
       if (data.status == 201) {
+        toast.success("Message is Created Successfully");
         ShowModal();
       }
     } catch (error) {
-      console.log("Error is here", error);
+      console.log("Error in Message", error);
     }
   };
 
