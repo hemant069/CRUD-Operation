@@ -1,6 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
 import CrudModal from "@/Model/crud.model";
-import { message } from "@/zodSchema/zodCrud";
 
 export async function PUT(req: Request, context: { params: { id: string } }) {
     try {
@@ -35,14 +34,14 @@ export async function PUT(req: Request, context: { params: { id: string } }) {
 
 
 
-export const DELETE=async(req:Request,context:{params:{id:string}})=>{
+export const DELETE=async(req:Request,context:{params:{_id:string}})=>{
 
 await dbConnect()
 
 try {
-    const {id}=context.params;
+    const {_id}=context.params;
 
-    const DeletedMessage= await CrudModal.findOneAndDelete(id);
+    const DeletedMessage= await CrudModal.findOneAndDelete(_id);
 
     return Response.json({message:"Message is Deleted Successfully",DeletedMessage},{status:202})
 
