@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import CrudModal from "@/Model/crud.model";
+import { message } from "@/zodSchema/zodCrud";
 
 export async function PUT(req: Request, context: { params: { id: string } }) {
     try {
@@ -14,8 +15,12 @@ export async function PUT(req: Request, context: { params: { id: string } }) {
 
        const findMessageById=await CrudModal.findById(id);
 
+       if(!findMessageById){
+        return Response.json({message:"Message is not found"})
+       }
 
-       const UpdateMessage= await CrudModal.updateOne(Message);
+
+       const UpdateMessage= await CrudModal.updateOne({id:id});
 
        
 

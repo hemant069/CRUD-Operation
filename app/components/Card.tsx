@@ -15,6 +15,8 @@ const Card = () => {
   const [isModal, setisModal] = useState(false);
   const [Loader, setLoader] = useState(false);
 
+  const [showInput, setShowInput] = useState(false);
+
   const [MessageData, setMessageData] = useState<messages[]>([]);
 
   const GetAllMessages = async () => {
@@ -48,6 +50,18 @@ const Card = () => {
       .catch((error) => toast.error("Error"));
   };
 
+  const handleEditFn = async (id: string) => {
+    setShowInput(!showInput);
+    // try {
+    //   const res = axios.put(`api/crud/${id}`);
+    //   const data = (await res).data;
+    //   console.log(data);
+    // } catch (error) {
+    //   console.log("Error in Put", error);
+    //   toast.error("Error in edit");
+    // }
+  };
+
   const ShowModal = () => {
     setisModal(!isModal);
   };
@@ -70,14 +84,18 @@ const Card = () => {
             className="flex items-center justify-between px-5"
           >
             <div>
-              <p className="font-sans border-b ">{item.message}</p>
+              {showInput ? (
+                <input type="text" />
+              ) : (
+                <p className="font-sans border-b ">{item.message}</p>
+              )}
             </div>
             <div className="flex gap-3 mt-2">
               <Button
                 onClick={() => handleDeletefn(item._id)}
                 Text={"Delete"}
               />
-              <Button onClick={() => ""} Text={"Edit"} />
+              <Button onClick={() => handleEditFn(item._id)} Text={"Edit"} />
             </div>
           </div>
         ))}
