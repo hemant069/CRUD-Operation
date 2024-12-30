@@ -15,24 +15,30 @@ const Card = () => {
   const [isModal, setisModal] = useState(false);
   const [Loader, setLoader] = useState(false);
 
-  const [showInput, setShowInput] = useState(false);
+  const [showInput, setShowInput] = useState("");
 
   const [MessageData, setMessageData] = useState<messages[]>([]);
+  const [EditMessage, setEditMessage] = useState("");
 
   const GetAllMessages = async () => {
     try {
       setLoader(true);
-      const res = await axios.get<messages[]>("api/crud");
-      const data = res.data.message;
-      console.log(data, res);
-      if ((res.status = 201)) {
-        setLoader(false);
-      }
-
-      setMessageData(data);
+      await toast.promise(
+        axios.get<messages[]>("api/crud").then((res) => {
+          const data = res?.data?.message;
+          console.log(data, res);
+          setMessageData(data); // Set the message data after fetching
+        }),
+        {
+          loading: "Loading....",
+          success: <b>Data is Coming!</b>,
+          error: <b>Whoops, something went wrong!</b>,
+        }
+      );
+      setLoader(false); // Stop the loader after success
     } catch (error) {
       console.log("Error in getting the message Data", error);
-      setLoader(true);
+      setLoader(false); // Stop the loader even on error
     }
   };
 
@@ -51,15 +57,20 @@ const Card = () => {
   };
 
   const handleEditFn = async (id: string) => {
-    setShowInput(!showInput);
-    // try {
-    //   const res = axios.put(`api/crud/${id}`);
-    //   const data = (await res).data;
-    //   console.log(data);
-    // } catch (error) {
-    //   console.log("Error in Put", error);
-    //   toast.error("Error in edit");
-    // }
+    setShowInput(id);
+  };
+
+  const handleSaveFn = async (id: string) => {
+    try {
+      const res = await axios.put(`api/crud/${id}`, { message: EditMessage });
+      const data = res.data;
+      toast.success("Message Updated Successfully");
+      setShowInput(!showInput);
+      GetAllMessages();
+    } catch (error) {
+      console.log("Error in Put", error);
+      toast.error("Error in edit");
+    }
   };
 
   const ShowModal = () => {
@@ -84,8 +95,13 @@ const Card = () => {
             className="flex items-center justify-between px-5"
           >
             <div>
-              {showInput ? (
-                <input type="text" />
+              {item._id === showInput ? (
+                <input
+                  className="text-black px-2 rounded-md "
+                  onChange={(e) => setEditMessage(e.target.value)}
+                  key={item._id}
+                  type="text"
+                />
               ) : (
                 <p className="font-sans border-b ">{item.message}</p>
               )}
@@ -95,7 +111,11 @@ const Card = () => {
                 onClick={() => handleDeletefn(item._id)}
                 Text={"Delete"}
               />
-              <Button onClick={() => handleEditFn(item._id)} Text={"Edit"} />
+              {item._id === showInput ? (
+                <Button onClick={() => handleSaveFn(item._id)} Text={"Save"} />
+              ) : (
+                <Button onClick={() => handleEditFn(item._id)} Text={"Edit"} />
+              )}
             </div>
           </div>
         ))}

@@ -1,32 +1,23 @@
 import dbConnect from "@/lib/dbConnect";
 import CrudModal from "@/Model/crud.model";
-import { message } from "@/zodSchema/zodCrud";
 
-export async function PUT(req: Request, context: { params: { id: string } }) {
+export async function PUT(req: Request, context: { params: { _id: string } }) {
     try {
-
-        const {id}=context.params;
-        const Message=await req.json()
-
-       if(!id){
-        return Response.json({message:"Wrong Id getting"},{status:404})
-       }
-
-
-       const findMessageById=await CrudModal.findById(id);
-
+        const {_id}=await context.params;
+        const udatedmessage= await req.json();
+       const findMessageById=await CrudModal.findById(_id);
        if(!findMessageById){
         return Response.json({message:"Message is not found"})
        }
 
 
-       const UpdateMessage= await CrudModal.updateOne({id:id});
+       const UpdateMessage= await CrudModal.updateOne({_id:_id},{$set:udatedmessage});
 
-       
+       if(UpdateMessage.modifiedCount===0){
+        return Response.json({message:"Failed to Update the Message"},{status:400})
+       }
 
-       
-
-       return Response.json({message:"Message is Updated Success",UpdateMessage},{status:201})
+       return Response.json({message:"Message is Updated Success",UpdateMessage},{status:200})
         
     } catch (error) {
 
