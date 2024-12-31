@@ -4,6 +4,7 @@ import Button from "./Button";
 import Model from "./Model";
 import axios from "axios";
 import toast from "react-hot-toast";
+import loadingGif from "../../public/loading.png";
 
 interface messages {
   message: string;
@@ -23,7 +24,7 @@ const Card = () => {
       await toast.promise(
         axios.get("api/crud").then((res) => {
           const data = res?.data?.message;
-          console.log(data, res);
+
           setMessageData(data); // Set the message data after fetching
         }),
         {
