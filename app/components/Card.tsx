@@ -28,7 +28,7 @@ const Card = () => {
         }),
         {
           loading: "Loading....",
-          success: <b>Data is Coming!</b>,
+          success: <b>Data baby 👻!</b>,
           error: <b>Whoops, something went wrong!</b>,
         }
       );
@@ -62,7 +62,7 @@ const Card = () => {
       await axios.put(`api/crud/${id}`, { message: EditMessage });
 
       toast.success("Message Updated Successfully");
-      setShowInput(id);
+      setShowInput("");
       GetAllMessages();
     } catch (error) {
       console.log("Error in Put", error);

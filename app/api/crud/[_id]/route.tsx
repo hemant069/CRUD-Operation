@@ -1,16 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import CrudModal from "@/Model/crud.model";
 
 // PUT Handler
 export async function PUT(
-  req: Request,
-  context: { params: { _id: string } } // This ensures type alignment
-): Promise<Response> {
+  req: NextRequest,
+  { params }: { params: Promise<{ _id: string }> } // This ensures type alignment
+): Promise<NextResponse> {
   await dbConnect();
 
   try {
-    const { _id } = context.params;
+    const _id = (await params)._id;
     const message = await req.json();
 
     if (!_id) {
@@ -48,12 +48,12 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  context: { params: { _id: string } }
+  { params }: { params: Promise<{ _id: string }> }
 ): Promise<Response> {
   await dbConnect();
 
   try {
-    const { _id } = context.params;
+    const _id = (await params)._id;
 
     const message = await CrudModal.findById(_id);
     if (!message) {
