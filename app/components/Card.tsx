@@ -4,7 +4,6 @@ import Button from "./Button";
 import Model from "./Model";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { error } from "console";
 
 interface messages {
   message: string;
@@ -13,7 +12,6 @@ interface messages {
 
 const Card = () => {
   const [isModal, setisModal] = useState(false);
-  const [Loader, setLoader] = useState(false);
 
   const [showInput, setShowInput] = useState("");
 
@@ -22,9 +20,8 @@ const Card = () => {
 
   const GetAllMessages = async () => {
     try {
-      setLoader(true);
       await toast.promise(
-        axios.get<messages[]>("api/crud").then((res) => {
+        axios.get("api/crud").then((res) => {
           const data = res?.data?.message;
           console.log(data, res);
           setMessageData(data); // Set the message data after fetching
@@ -35,10 +32,10 @@ const Card = () => {
           error: <b>Whoops, something went wrong!</b>,
         }
       );
-      setLoader(false); // Stop the loader after success
+      // Stop the loader after success
     } catch (error) {
       console.log("Error in getting the message Data", error);
-      setLoader(false); // Stop the loader even on error
+      // Stop the loader even on error
     }
   };
 
@@ -49,11 +46,11 @@ const Card = () => {
   const handleDeletefn = (id: string) => {
     axios
       .delete(`api/crud/${id}`)
-      .then((res) => {
+      .then(() => {
         toast.success("Message delete successfully");
         GetAllMessages();
       })
-      .catch((error) => toast.error("Error"));
+      .catch(() => toast.error("Error"));
   };
 
   const handleEditFn = async (id: string) => {
@@ -62,10 +59,10 @@ const Card = () => {
 
   const handleSaveFn = async (id: string) => {
     try {
-      const res = await axios.put(`api/crud/${id}`, { message: EditMessage });
-      const data = res.data;
+      await axios.put(`api/crud/${id}`, { message: EditMessage });
+
       toast.success("Message Updated Successfully");
-      setShowInput(!showInput);
+      setShowInput(id);
       GetAllMessages();
     } catch (error) {
       console.log("Error in Put", error);

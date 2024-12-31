@@ -1,7 +1,5 @@
 import dbConnect from "@/lib/dbConnect"
 import CrudModal from "@/Model/crud.model";
-import { message } from "@/zodSchema/zodCrud";
-import { NextRequest, NextResponse } from "next/server";
 
 
 export const POST=async(request:Request)=>{
