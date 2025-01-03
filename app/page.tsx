@@ -9,7 +9,7 @@ const page = () => {
       <Toaster position="top-center" />
       <div className="mb-10 flex justify-center ">
         <Image
-          className="opacity-80 rounded-3xl object-fill bg-fixed"
+          className="opacity-80 rounded-3xl object-fill "
           src={design}
           alt="design"
           width={600}
