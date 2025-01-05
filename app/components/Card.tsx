@@ -78,7 +78,7 @@ const Card = () => {
   return (
     <div>
       <div className="flex justify-center mt-2">
-        <Button onClick={ShowModal} Text={"Add Message"} />
+        <Button color="7209b7" onClick={ShowModal} Text={"Add Message"} />
       </div>
       {isModal && <Model ShowModal={ShowModal} />}
       <div className="">
@@ -96,7 +96,7 @@ const Card = () => {
               <div>
                 {item._id === showInput ? (
                   <input
-                    className="text-black px-2 rounded-md "
+                    className="text-black font-sans w-[9rem] lg:w-full px-2 rounded-md "
                     onChange={(e) => setEditMessage(e.target.value)}
                     key={item._id}
                     type="text"
@@ -110,6 +110,7 @@ const Card = () => {
                   onClick={() => handleDeletefn(item._id)}
                   Text={"Delete"}
                   width={5}
+                  color="ef233c"
                 />
                 {item._id === showInput ? (
                   <Button
@@ -122,6 +123,7 @@ const Card = () => {
                     onClick={() => handleEditFn(item._id)}
                     Text={"Edit"}
                     width={5}
+                    color="3a5a40"
                   />
                 )}
               </div>

@@ -16,7 +16,7 @@ const page = () => {
           height={300}
         />
       </div>
-      <div className=" lg:border  lg:h-[30rem]  p-2 rounded-xl ">
+      <div className=" ring-2   lg:h-[30rem]  p-2 rounded-xl ">
         <Card />
       </div>
     </div>
