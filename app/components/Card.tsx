@@ -82,41 +82,52 @@ const Card = () => {
       </div>
       {isModal && <Model ShowModal={ShowModal} />}
       <div className="">
-        <div className="flex justify-between px-4">
+        <div className=" flex justify-between px-4">
           <h3 className="text-2xl font-mono mb-2">Messages</h3>
           <h3 className="text-2xl font-mono mb-2">Operation</h3>
         </div>
 
-        {MessageData.map((item) => (
-          <div
-            key={item._id}
-            className="flex items-center justify-between px-5"
-          >
-            <div>
-              {item._id === showInput ? (
-                <input
-                  className="text-black px-2 rounded-md "
-                  onChange={(e) => setEditMessage(e.target.value)}
-                  key={item._id}
-                  type="text"
+        <div className="">
+          {MessageData.map((item) => (
+            <div
+              key={item._id}
+              className="flex items-center justify-between px-5"
+            >
+              <div>
+                {item._id === showInput ? (
+                  <input
+                    className="text-black px-2 rounded-md "
+                    onChange={(e) => setEditMessage(e.target.value)}
+                    key={item._id}
+                    type="text"
+                  />
+                ) : (
+                  <p className="font-sans border-b ">{item.message}</p>
+                )}
+              </div>
+              <div className="flex gap-3 mt-2">
+                <Button
+                  onClick={() => handleDeletefn(item._id)}
+                  Text={"Delete"}
+                  width={5}
                 />
-              ) : (
-                <p className="font-sans border-b ">{item.message}</p>
-              )}
+                {item._id === showInput ? (
+                  <Button
+                    onClick={() => handleSaveFn(item._id)}
+                    Text={"Save"}
+                    width={5}
+                  />
+                ) : (
+                  <Button
+                    onClick={() => handleEditFn(item._id)}
+                    Text={"Edit"}
+                    width={5}
+                  />
+                )}
+              </div>
             </div>
-            <div className="flex gap-3 mt-2">
-              <Button
-                onClick={() => handleDeletefn(item._id)}
-                Text={"Delete"}
-              />
-              {item._id === showInput ? (
-                <Button onClick={() => handleSaveFn(item._id)} Text={"Save"} />
-              ) : (
-                <Button onClick={() => handleEditFn(item._id)} Text={"Edit"} />
-              )}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

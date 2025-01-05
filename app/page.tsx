@@ -5,18 +5,18 @@ import design from "../public/exceildraw.svg";
 
 const page = () => {
   return (
-    <div className="p-32">
+    <div className="lg:p-32">
       <Toaster position="top-center" />
       <div className="mb-10 flex justify-center ">
         <Image
-          className="opacity-80 rounded-3xl object-fill "
+          className="opacity-80 lg:rounded-3xl object-fill "
           src={design}
           alt="design"
           width={600}
           height={300}
         />
       </div>
-      <div className=" border h-[30rem]  p-2 rounded-xl ">
+      <div className=" lg:border  lg:h-[30rem]  p-2 rounded-xl ">
         <Card />
       </div>
     </div>
