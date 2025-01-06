@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Crud",
   description:
-    "This webapp basically for the crud operation mean you can create,read,update and delete",
+    "This webapp basically for the crud operation mean you can create, read, update and delete",
 };
 
 export default function RootLayout({

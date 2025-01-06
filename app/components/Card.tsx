@@ -5,6 +5,7 @@ import Model from "./Model";
 import axios from "axios";
 import toast from "react-hot-toast";
 import loadingGif from "../../public/loading.png";
+import DarkMode from "./DarkMode";
 
 interface messages {
   message: string;
@@ -87,7 +88,7 @@ const Card = () => {
       </div>
       {isModal && <Model ShowModal={ShowModal} />}
       <div className="">
-        <div className=" flex justify-between px-4">
+        <div className=" flex dark:text-white justify-between px-4">
           <h3 className="text-2xl font-mono mb-2">Messages</h3>
           <h3 className="text-2xl font-mono mb-2">Operation</h3>
         </div>
@@ -107,7 +108,9 @@ const Card = () => {
                     type="text"
                   />
                 ) : (
-                  <p className="font-sans border-b ">{item.message}</p>
+                  <p className="font-sans border-b dark:text-white ">
+                    {item.message}
+                  </p>
                 )}
               </div>
               <div className="flex gap-3 mt-2">
