@@ -78,7 +78,12 @@ const Card = () => {
   return (
     <div>
       <div className="flex justify-center mt-2">
-        <Button color="7209b7" onClick={ShowModal} Text={"Add Message"} />
+        <Button
+          color="white"
+          bgcolor="7209b7"
+          onClick={ShowModal}
+          Text={"Add Message"}
+        />
       </div>
       {isModal && <Model ShowModal={ShowModal} />}
       <div className="">
@@ -110,20 +115,24 @@ const Card = () => {
                   onClick={() => handleDeletefn(item._id)}
                   Text={"Delete"}
                   width={5}
-                  color="ef233c"
+                  bgcolor="ef233c"
+                  color="white"
                 />
                 {item._id === showInput ? (
                   <Button
                     onClick={() => handleSaveFn(item._id)}
                     Text={"Save"}
                     width={5}
+                    bgcolor="3a5a40"
+                    color="white"
                   />
                 ) : (
                   <Button
                     onClick={() => handleEditFn(item._id)}
                     Text={"Edit"}
                     width={5}
-                    color="3a5a40"
+                    bgcolor="3a5a40"
+                    color="white"
                   />
                 )}
               </div>

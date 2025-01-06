@@ -34,8 +34,18 @@ const Model = ({ ShowModal }: modal) => {
         />
       </div>
       <div className="flex gap-2">
-        <Button color="03045e" Text="Submit" onClick={handleSubmit} />
-        <Button color="6d6865" Text="Cancel" onClick={() => ShowModal()} />
+        <Button
+          color="white"
+          bgcolor="03045e"
+          Text="Submit"
+          onClick={handleSubmit}
+        />
+        <Button
+          color="white"
+          bgcolor="6d6865"
+          Text="Cancel"
+          onClick={() => ShowModal()}
+        />
       </div>
     </div>
   );
