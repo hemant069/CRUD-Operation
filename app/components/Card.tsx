@@ -101,7 +101,7 @@ const Card = () => {
               <div>
                 {item._id === showInput ? (
                   <input
-                    className="text-black font-sans w-[9rem] lg:w-full px-2 rounded-md "
+                    className="text-black outline-none border ring-1 border-sky-100 font-sans w-[9rem] lg:w-full px-2 rounded-md "
                     onChange={(e) => setEditMessage(e.target.value)}
                     key={item._id}
                     type="text"
