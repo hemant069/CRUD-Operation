@@ -14,7 +14,7 @@ const DarkMode = () => {
   return (
     <>
       <p
-        className="border border-blue-500  shadow-lg p-2 w-10 rounded-full cursor-pointer"
+        className="border border-blue-500  shadow-lg lg:p-2 lg:w-10 rounded-full cursor-pointer"
         onClick={() => setIsDarkMode(!isDarkMode)}
       >
         {isDarkMode ? "🌚" : "🌞"}
